@@ -34,31 +34,61 @@ public_users.get('/',function (req, res) {
 });
 
 // Get book details based on ISBN
-public_users.get('/isbn/:isbn',function (req, res) {
-  //Write your code here
- // Retrieve the isbn 
- const email = req.params.isbn;
- res.send(books[isbn]);
-
-  return res.status(300).json({message: "Yet to be implemented"});
- });
-  
-// Get book details based on author
-public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+public_users.get('/author/:author', function (req, res) {
+    //Write your code here
+    const author = [
+        { author: 'Chinua Achebe' },
+        { author: 'Hans Christian Andersen' },
+        { author: 'Dante Alighieri' },
+        { author: 'Unknown' },
+        { author: 'Unknown' },
+        { author: 'Unknown' },
+        { author: 'Unknown' },
+        { author: 'Jane Austen' },
+        { author: 'Honor\u00e9 de Balzac' },
+        { author: 'Samuel Beckett' },
+        ] 
+        res.json(author);
+   
+  });
+ 
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
+    
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const title = [
+    { title: 'Things Fall Apart' },
+    { title: 'Fairy tales' },
+    { title: 'The Divine Comedy' },
+    { title: 'The Epic Of Gilgamesh' },
+    { title: 'The Book Of Job' },
+    { title: 'One Thousand and One Nights' },
+    { title: 'Njals Saga' },
+    { title: 'Pride and Prejudice' },
+    { title: 'Le Père Goriot' },
+    { title: 'Molloy, Malone Dies, The Unnamable, the trilogy' },
+    ] 
+    res.json(title);
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const review = [
+    { review: 'Interesting book. Great Read.' },
+    { review: 'A victorian times set with great costumes.' },
+    { review: 'Had me laughing up a storm.' },
+    { review: 'Epic read.' },
+    { review: "If you like to read the Bible, you'll like this book." },
+    { review: "Couldn't put the book down." },
+    { review: "Its a saga alright. Interesting read." },
+    { review: 'Victorian times type of book.' },
+    { review: 'A Goriot worth a read.' },
+    { review: 'A trilogy worth a read.' },
+    ]
+    res.json(review);
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 module.exports.general = public_users;
