@@ -28,7 +28,23 @@ public_users.post("/register", (req,res) => {
 // Get the entire book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
+  //Console log before calling the promise
+console.log("Searching for all books");
+
   res.send(JSON.stringify(books,null,4));
+  //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
+let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise resolved")
+    },6000)})
+
+//Call the promise and wait for it to be resolved and then print a message.
+myPromise.then((successMessage) => {
+    console.log("Callback " + successMessage)
+  })
+
+//Console log after calling the promise
+  console.log("Complete list of books");
 
   //return res.status(300).json({message: "Yet to be implemented"});
 });
@@ -36,19 +52,46 @@ public_users.get('/',function (req, res) {
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
     //Write your code here
+
     const author = [
-        { author: 'Chinua Achebe' },
-        { author: 'Hans Christian Andersen' },
-        { author: 'Dante Alighieri' },
-        { author: 'Unknown' },
-        { author: 'Unknown' },
-        { author: 'Unknown' },
-        { author: 'Unknown' },
-        { author: 'Jane Austen' },
-        { author: 'Honor\u00e9 de Balzac' },
-        { author: 'Samuel Beckett' },
+        { author: 'Chinua Achebe', 
+        title: "Things Fall Apart", },
+        { author: 'Hans Christian Andersen', 
+          title: "Fairy tales", },
+        { author: 'Dante Alighieri', 
+        title: "The Divine Comedy", },
+        { author: 'Unknown', 
+        title: "The Epic Of Gilgamesh",  },
+        { author: 'Unknown',
+        title: "The Book Of Job", },
+        { author: 'Unknown', 
+        title: "One Thousand and One Nights",}, 
+        { author: 'Unknown', 
+        title: "Nj\u00e1l's Saga", },
+        { author: 'Jane Austen', 
+        title: "Pride and Prejudice",},
+        { author: 'Honor\u00e9 de Balzac', 
+        title: "Le P\u00e8re Goriot", },
+        { author: 'Samuel Beckett', 
+        title: "Molloy, Malone Dies, The Unnamable, the trilogy",},
         ] 
         res.json(author);
+
+    //Console log before calling the promise
+    console.log("Searching for books based on author");
+          //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
+let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise resolved")
+    },6000)})
+
+//Call the promise and wait for it to be resolved and then print a message.
+myPromise.then((successMessage) => {
+    console.log("Callback " + successMessage)
+  })
+
+//Console log after calling the promise
+  console.log("Complete list of books by authors");
    
   });
  
@@ -58,18 +101,44 @@ public_users.get('/title/:title',function (req, res) {
     
   //Write your code here
   const title = [
-    { title: 'Things Fall Apart' },
-    { title: 'Fairy tales' },
-    { title: 'The Divine Comedy' },
-    { title: 'The Epic Of Gilgamesh' },
-    { title: 'The Book Of Job' },
-    { title: 'One Thousand and One Nights' },
-    { title: 'Njals Saga' },
-    { title: 'Pride and Prejudice' },
-    { title: 'Le Père Goriot' },
-    { title: 'Molloy, Malone Dies, The Unnamable, the trilogy' },
+    { title: 'Things Fall Apart', 
+    author: 'Chinua Achebe',},
+    { title: 'Fairy tales',
+    author: 'Hans Christian Andersen', },
+    { title: 'The Divine Comedy', 
+    author: 'Dante Alighieri', },
+    { title: 'The Epic Of Gilgamesh', 
+    author: 'Unknown',},
+    { title: 'The Book Of Job', 
+    author: 'Unknown',},
+    { title: 'One Thousand and One Nights', 
+    author: 'Unknown',},
+    { title: 'Njals Saga',
+    author: 'Unknown', },
+    { title: 'Pride and Prejudice',
+    author: 'Jane Austen', },
+    { title: 'Le Père Goriot', 
+    author: 'Honor\u00e9 de Balzac',},
+    { title: 'Molloy, Malone Dies, The Unnamable, the trilogy',
+    author: 'Samuel Beckett',},
     ] 
     res.json(title);
+
+    //Console log before calling the promise
+    console.log("Searching for books based on title");
+          //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
+let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise resolved")
+    },6000)})
+
+//Call the promise and wait for it to be resolved and then print a message.
+myPromise.then((successMessage) => {
+    console.log("Callback " + successMessage)
+  })
+
+//Console log after calling the promise
+  console.log("Complete list of books by title");
 });
 
 //  Get book review
