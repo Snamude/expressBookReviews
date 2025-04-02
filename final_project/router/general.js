@@ -36,118 +36,70 @@ public_users.get('/',function (req, res) {
 // Get book details based on isbn
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
- });
+  const isbn = req.params.isbn;
+
+  if (books[isbn]) {
+    res.json(books[isbn]);
+  } else {
+    res.status(404).json({ message: 'Book not found' });
+  }  });
  
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
     //Write your code here
-
-    const author = [
-        { author: 'Chinua Achebe', 
-        title: "Things Fall Apart", },
-        { author: 'Hans Christian Andersen', 
-          title: "Fairy tales", },
-        { author: 'Dante Alighieri', 
-        title: "The Divine Comedy", },
-        { author: 'Unknown', 
-        title: "The Epic Of Gilgamesh",  },
-        { author: 'Unknown',
-        title: "The Book Of Job", },
-        { author: 'Unknown', 
-        title: "One Thousand and One Nights",}, 
-        { author: 'Unknown', 
-        title: "Nj\u00e1l's Saga", },
-        { author: 'Jane Austen', 
-        title: "Pride and Prejudice",},
-        { author: 'Honor\u00e9 de Balzac', 
-        title: "Le P\u00e8re Goriot", },
-        { author: 'Samuel Beckett', 
-        title: "Molloy, Malone Dies, The Unnamable, the trilogy",},
-        ] 
-        res.json(author);
-
-    //Console log before calling the promise
-    console.log("Searching for books based on author");
-          //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
-let myPromise = new Promise((resolve,reject) => {
-    setTimeout(() => {
-      resolve("Promise resolved")
-    },6000)})
-
-//Call the promise and wait for it to be resolved and then print a message.
-myPromise.then((successMessage) => {
-    console.log("Callback " + successMessage)
-  })
-
-//Console log after calling the promise
-  console.log("Complete list of books by authors");
-   
+    const author = req.params.author;
+    const authorBooks = [];
+  
+    for (const isbn in books) {
+      if (books.hasOwnProperty(isbn) && books[isbn].author === author) {
+        authorBooks.push(books[isbn]);
+      }
+    }
+  
+    if (authorBooks.length > 0) {
+      res.json(authorBooks);
+    } else {
+      res.status(404).json({ message: 'No books found for that author' });
+    }
   });
  
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-    
+
   //Write your code here
-  const title = [
-    { title: 'Things Fall Apart', 
-    author: 'Chinua Achebe',},
-    { title: 'Fairy tales',
-    author: 'Hans Christian Andersen', },
-    { title: 'The Divine Comedy', 
-    author: 'Dante Alighieri', },
-    { title: 'The Epic Of Gilgamesh', 
-    author: 'Unknown',},
-    { title: 'The Book Of Job', 
-    author: 'Unknown',},
-    { title: 'One Thousand and One Nights', 
-    author: 'Unknown',},
-    { title: 'Njals Saga',
-    author: 'Unknown', },
-    { title: 'Pride and Prejudice',
-    author: 'Jane Austen', },
-    { title: 'Le Père Goriot', 
-    author: 'Honor\u00e9 de Balzac',},
-    { title: 'Molloy, Malone Dies, The Unnamable, the trilogy',
-    author: 'Samuel Beckett',},
-    ] 
-    res.json(title);
+  const title = req.params.title;
+  let foundBook = null;
 
-    //Console log before calling the promise
-    console.log("Searching for books based on title");
-          //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
-let myPromise = new Promise((resolve,reject) => {
-    setTimeout(() => {
-      resolve("Promise resolved")
-    },6000)})
+  for (const isbn in books) {
+    if (books.hasOwnProperty(isbn) && books[isbn].title === title) {
+      foundBook = books[isbn];
+      break; // Stop iterating once the book is found
+    }
+  }
 
-//Call the promise and wait for it to be resolved and then print a message.
-myPromise.then((successMessage) => {
-    console.log("Callback " + successMessage)
-  })
-
-//Console log after calling the promise
-  console.log("Complete list of books by title");
+  if (foundBook) {
+    res.json(foundBook);
+  } else {
+    res.status(404).json({ message: 'Book not found' });
+  }
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  const review = [
-    { review: 'Interesting book. Great Read.' },
-    { review: 'A victorian times set with great costumes.' },
-    { review: 'Had me laughing up a storm.' },
-    { review: 'Epic read.' },
-    { review: "If you like to read the Bible, you'll like this book." },
-    { review: "Couldn't put the book down." },
-    { review: "Its a saga alright. Interesting read." },
-    { review: 'Victorian times type of book.' },
-    { review: 'A Goriot worth a read.' },
-    { review: 'A trilogy worth a read.' },
-    ]
-    res.json(review);
-  //return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+
+  if (books[isbn]) {
+    const reviews = books[isbn].reviews;
+    if (reviews && Object.keys(reviews).length > 0) {
+      res.json(reviews);
+    } else {
+      res.status(404).json({ message: 'No reviews found for this book' });
+    }
+  } else {
+    res.status(404).json({ message: 'Book not found' });
+  }
 });
 
 module.exports.general = public_users;
