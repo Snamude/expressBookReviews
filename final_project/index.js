@@ -8,11 +8,15 @@ const app = express();
 
 app.use(express.json());
 
+let user = [
+    { username: 'user1', password: 'password1' },
+    { username: 'user2', password: 'password2' },
+  ];
+
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 
 app.use("/customer/auth/*", function auth(req,res,next){
-//Write the authenication mechanism here
-
+//Write the authenication mechanism here 
   // Check if user is logged in and has valid access token
     if (req.session.authorization) {
         let token = req.session.authorization['accessToken'];
@@ -27,11 +31,11 @@ app.use("/customer/auth/*", function auth(req,res,next){
             }
         });
     } else {
-        return res.status(403).json({ message: "User not logged in" });
+        return res.status(403).json({ message: "User successfully logged in" });
     }
 
 });
- 
+
 const PORT =5000;
 
 app.use("/customer", customer_routes);
