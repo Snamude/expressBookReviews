@@ -27,28 +27,18 @@ public_users.post("/register", (req,res) => {
 
 // Get the entire book list available in the shop
 public_users.get('/',function (req, res) {
-  //Write your code here
-  //Console log before calling the promise
-console.log("Searching for all books");
-
+  //Write your code here 
   res.send(JSON.stringify(books,null,4));
-  //Creating a promise method. The promise will get resolved when timer times out after 6 seconds.
-let myPromise = new Promise((resolve,reject) => {
-    setTimeout(() => {
-      resolve("Promise resolved")
-    },6000)})
-
-//Call the promise and wait for it to be resolved and then print a message.
-myPromise.then((successMessage) => {
-    console.log("Callback " + successMessage)
-  })
-
-//Console log after calling the promise
-  console.log("Complete list of books");
-
-  //return res.status(300).json({message: "Yet to be implemented"});
+   
+  return res.status(300).json({message: "Yet to be implemented"});
 });
 
+// Get book details based on ISBN
+public_users.get('/isbn/:isbn',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+ });
+ 
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
     //Write your code here
