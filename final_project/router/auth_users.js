@@ -54,17 +54,10 @@ function authenticatedUser(username, password) {
 
 // Add a book review
 regd_users.put("/auth/review/:title", (req, res) => {     
-    let review = [
-        {   username: 'user2',
-            review: 'Interesting book. Great Read.' 
-        },
-        {   username: 'user1',
-            review: 'A victorian times set with great costumes.' 
-        }, 
-        ]
-        res.json(review); 
+    //in general.js
      });
 
+     
      regd_users.delete("/:review", (req, res) => {
         // Extract review parameter from request URL
         const review = req.params.review;
@@ -75,8 +68,9 @@ regd_users.put("/auth/review/:title", (req, res) => {
         }
         
         // Send response confirming deletion of review
-        res.send(`book with the review ${review} deleted.`);
+        res.send('user2 review for the ISBN ${isbn} is deleted..');    
     });
+
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
